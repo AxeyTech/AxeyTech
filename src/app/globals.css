@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #050000;
+  --bg-secondary: #0a0303;
+  --bg-card: rgba(220, 38, 38, 0.04);
+  --border: rgba(220, 38, 38, 0.12);
+  --text-primary: #f0e0e0;
+  --text-secondary: #a08080;
+  --text-muted: #6b3a3a;
+  --accent: #dc2626;
+  --accent-glow: rgba(220, 38, 38, 0.35);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Syne', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+}
+
+* {
+  caret-color: transparent;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+input,
+textarea {
+  caret-color: #dc2626;
+}
+
+/* === RED GLOW UTILITIES === */
+.red-glow {
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.25), 0 0 60px rgba(220, 38, 38, 0.08);
+}
+
+.red-glow-intense {
+  box-shadow: 0 0 30px rgba(220, 38, 38, 0.4), 0 0 80px rgba(220, 38, 38, 0.15), 0 0 120px rgba(220, 38, 38, 0.05);
+}
+
+.red-gradient-text {
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 40%, #f87171 70%, #dc2626 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.red-glass {
+  background: rgba(220, 38, 38, 0.03);
+  border: 1px solid rgba(220, 38, 38, 0.1);
+  backdrop-filter: blur(16px);
+}
+
+.red-glass-card {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.06), rgba(220, 38, 38, 0.02));
+  border: 1px solid rgba(220, 38, 38, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+/* === ANIMATED BORDER === */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.animated-red-border {
+  --angle: 0deg;
+  border: 1px solid transparent;
+  background-image: linear-gradient(var(--bg-primary), var(--bg-primary)),
+    conic-gradient(from var(--angle), transparent 60%, #dc2626, transparent 40%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  animation: rotateBorder 4s linear infinite;
+}
+
+@keyframes rotateBorder {
+  to { --angle: 360deg; }
+}
+
+/* === ANIMATIONS === */
+@keyframes redPulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(220, 38, 38, 0.2); }
+  50% { box-shadow: 0 0 35px rgba(220, 38, 38, 0.45); }
+}
+
+@keyframes emberFloat {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.8; }
+  25% { transform: translateY(-25vh) translateX(10px) scale(0.8); opacity: 0.6; }
+  50% { transform: translateY(-50vh) translateX(-5px) scale(0.6); opacity: 0.4; }
+  75% { transform: translateY(-75vh) translateX(8px) scale(0.3); opacity: 0.2; }
+  100% { transform: translateY(-100vh) translateX(0) scale(0.1); opacity: 0; }
+}
+
+@keyframes subtleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+@keyframes heroGlowPulse {
+  0%, 100% {
+    transform: scale(1) translate3d(0, 0, 0);
+    opacity: 0.22;
+  }
+  50% {
+    transform: scale(1.15) translate3d(0, 0, 0);
+    opacity: 0.35;
+  }
+}
+
+@keyframes indicatorBounce {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(0, 8px, 0);
+    opacity: 0.5;
+  }
+}
+
+.animate-hero-glow {
+  animation: heroGlowPulse 5s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+}
+
+.animate-indicator-bounce {
+  animation: indicatorBounce 1.6s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+}
+
+.animate-ember {
+  animation: emberFloat linear infinite;
+}
+
+.animate-red-pulse {
+  animation: redPulse 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: subtleFloat 6s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* === CUSTOM SCROLLBAR === */
+.custom-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(220, 38, 38, 0.3);
+  border-radius: 999px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(220, 38, 38, 0.5);
+}
+
+/* === FOCUS RINGS === */
+input:focus, textarea:focus {
+  border-color: rgba(220, 38, 38, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1), 0 0 20px rgba(220, 38, 38, 0.1) !important;
+}
